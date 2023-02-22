@@ -1,72 +1,78 @@
 <script setup>
 import { useStore } from 'vuex';
-import {computed} from "vue"
+import { computed } from 'vue'
 const store = useStore()
-const videos = computed(() => store.getters.videos)
-const imgPerCol = computed(() =>store.getters.imgPerCol)
-//e
-const toggleSubscription = (video) =>{
-    if (video.isSubscribed) {
-        const index = store.state.Youtube.subscribed.findIndex(sub => sub.uploader_name == video.uploader);
-        store.state.Youtube.subscribed.splice(index, 1);
-
-    } else {
-        store.state.Youtube.subscribed.push({ uploader_name: video.uploader, uploader_img: video.uploader_img, isSubscribed: true });
-    } 
-    video.isSubscribed = !video.isSubscribed;
-}
+const videos = computed(() => store.getters["Youtube/videos"])
+const active = computed(() => store.getters["menu/gridTemplate"])
 </script>
 
 <template>
-    <div class="video-table" :style="{display: 'grid', gridTemplateColumns: store.state.Youtube.imgPerCol}">
-        <div v-for="video in videos">
+
+        <div class="video-table" :style="{gridTemplateColumns: active}">
+        <div class="card" v-for="video in videos">
             <img class="video-img" :src="video.img" alt="">
+            <div class="description">
+                <img class="profile-pic" :src="video.uploader_img" alt="">
+                <div class="video-name">
+                    <h3 class="name">{{ video.name }}</h3>
+                    <p class="uploader">{{ video.uploader }}</p>
+                    <p class="upload-date">{{ video.date }}</p>
+
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 
 <style scoped >
-.upload-date{
+
+
+
+.upload-date {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #606060;
     padding-bottom: 3px;
 }
-.profile-pic{
-    margin-top: -70px;
+
+.profile-pic {
+    margin-top: -10%;
 }
-.name{
+
+.name {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     padding-bottom: 3px;
 }
-.uploader{
+
+.uploader {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     color: #606060;
     padding-bottom: 3px;
 
 }
-.video-name{
+
+.video-name {
     padding: 8px;
 }
-.description{
+
+.description {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
 }
-.video-table{
+
+.video-table {
+    display: grid;
     margin-top: 5%;
-
-    column-gap: 15px;
+    row-gap: 30px;
     width: 80%;
-    margin-left: 8%;
-}
-.video-img{
-    width: 100%;
-    height: 70%;
-    border-radius: 15px;
+    margin-left: 5%;
 }
 
-</style>
+.video-img {
+    width: 87%;
+    height: 180px;
+    border-radius: 15px;
+}</style>

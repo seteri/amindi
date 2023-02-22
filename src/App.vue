@@ -12,11 +12,12 @@
 
 <template>
   <Head/>
+  
   <div class="ff">
-    <div>
+
       <LeftSide/>
       
-    </div>
+
     <Videos/>
   </div>
 

@@ -1,17 +1,8 @@
 <script setup>
 import { useStore } from 'vuex';
-import { ref } from 'vue';
 const store = useStore()
-let count = ref(0)
 const menuOn = () =>{
-  store.state.Youtube.menuOn = !store.state.Youtube.menuOn
-  if(count.value%2==0){
-    store.state.Youtube.imgPerCol = 'repeat(5, 1fr)'
-  }
-  else if(count.value%2!=0){
-    store.state.Youtube.imgPerCol = 'repeat(4, 1fr)'
-  }
-  count.value++
+  store.state.menu.menuOn = !store.state.menu.menuOn
 }
 
 </script>
@@ -19,18 +10,18 @@ const menuOn = () =>{
 <template>
   <div class="head">
     <div class="first-part">
-      <img @click="menuOn" class="hamburger" src="../icons/Hamburger_icon.svg.png" alt="">
-      <img class="youtube-logo" src="../icons/8gzcr6RpGStvZFA2qRt4v6-removebg-preview.png" alt="">
+      <img @click="menuOn" class="hamburger" src="../../assets/icons/Hamburger_icon.svg.png" alt="">
+      <img class="youtube-logo" src="../../assets/icons/8gzcr6RpGStvZFA2qRt4v6-removebg-preview.png" alt="">
     </div>
     <div class="middle-part">
       <input class="search-input" placeholder="Search">
       <div class="search-button">
-        <img class="search-button-logo" src="../icons/3031293.png" alt="">
+        <img class="search-button-logo" src="../../assets/icons/3031293.png" alt="">
       </div>
     </div>
     <div class="third-part">
-      <img class="bell-icon" src="../icons/free-bell-icon-860-thumb.png" alt="">
-      <img class="profile-pic" src="../icons/channels4_profile.jpg" alt="">
+      <img class="bell-icon" src="../../assets/icons/free-bell-icon-860-thumb.png" alt="">
+      <img class="profile-pic" src="../../assets/icons/channels4_profile.jpg" alt="">
     </div>
    
   </div>

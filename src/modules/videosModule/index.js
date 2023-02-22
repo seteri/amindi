@@ -3,9 +3,7 @@ const videosModule = {
     namespaced: true,
 
     state(){
-        return{
-            imgPerCol: 'repeat(4, 1fr)',
-        
+        return{        
             subscribed: [],
             videos: [
                 {id:1, name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg", uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
@@ -18,11 +16,18 @@ const videosModule = {
                 {id:8,name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg",uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
                 {id:9,name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg",uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
                 {id:10,name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg",uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
-        
-            
+                {id:10,name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg",uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
+                {id:10,name: "Random name", date: "2 days ago", uploader: "papunaHD", img: "http://az837918.vo.msecnd.net/publishedimages/articles/1733/en-CA/images/1/free-download-this-stunning-alberta-scene-for-your-device-background-image-L-6.jpg",uploader_img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlmp7PiMFWsMlv1-mshHFmPBIDgiypF5RjlA&usqp=CAU"},
+         
             ]
         
         }
+    },
+
+    getters:{
+        videos(state){
+            return state.videos
+        },
     }
 }
 

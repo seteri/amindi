@@ -1,7 +1,13 @@
 import videosModule from "../modules/videosModule";
 import iconsModule from "../modules/iconsModule";
+import menuModule from "../modules/menuModule";
+import subscriptionsModule from "../modules/subscriptionsModule";
+import routersModule from "../modules/routersModule";
 
 export default function youtubePlugin(store){
     store.registerModule("Youtube",videosModule)
-    store.registerModule("iconsPlugin",iconsModule)
+    store.registerModule("icons",iconsModule)
+    store.registerModule("menu",menuModule)
+    store.registerModule("subscriptions",subscriptionsModule)
+    store.registerModule("routers",routersModule)
 }
