@@ -13,10 +13,10 @@ const menuModule = {
         },
         gridTemplate(state) {
             if(state.menuOn){
-                return "1fr 1fr 1fr 1fr 1fr"
+                return "1fr 1fr 1fr 1fr"
             }
             else{
-                return "1fr 1fr 1fr 1fr"
+                return "1fr 1fr 1fr 1fr 1fr"
             }
         }
     }

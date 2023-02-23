@@ -4,12 +4,14 @@ import { computed } from 'vue'
 const store = useStore()
 const videos = computed(() => store.getters["Youtube/videos"])
 const active = computed(() => store.getters["menu/gridTemplate"])
+const activeCategory = computed(() => store.getters["categories/activeCategory"])  
 </script>
 
 <template>
 
         <div class="video-table" :style="{gridTemplateColumns: active}">
-        <div class="card" v-for="video in videos">
+        <div class="card" v-for="video in videos" >
+          <div v-if="video.category== activeCategory ">
             <img class="video-img" :src="video.img" alt="">
             <div class="description">
                 <img class="profile-pic" :src="video.uploader_img" alt="">
@@ -20,6 +22,7 @@ const active = computed(() => store.getters["menu/gridTemplate"])
 
                 </div>
             </div>
+          </div>
         </div>
     </div>
 </template>
@@ -67,8 +70,9 @@ const active = computed(() => store.getters["menu/gridTemplate"])
     display: grid;
     margin-top: 5%;
     row-gap: 30px;
-    width: 80%;
-    margin-left: 5%;
+    width: 80vw;
+    margin-left: 10%;
+    box-sizing: border-box;
 }
 
 .video-img {

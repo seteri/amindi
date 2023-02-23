@@ -52,6 +52,7 @@ const menuOn = () =>{
   margin-left: 20px;
 }
 .head{
+  top: 0;
   display: flex;
   align-items: center;
   position: fixed;

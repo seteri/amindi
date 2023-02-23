@@ -27,10 +27,6 @@ const more = () =>{
             </div>
         </div>
     </div>
-
-
-
-
 <!--This part shows bigger icons-->
     <div class="menu" v-if="active">
         <div class="first-part">
@@ -49,7 +45,9 @@ const more = () =>{
                 </div>
             </div>
           <div class="moreChannels">
-            <img @click="more" class="arrow" src="https://cdn.iconscout.com/icon/free/png-256/keyboard-arrow-down-1780936-1517439.png" alt="">
+            <img v-if="showMore == false" @click="more" class="arrow" src="https://cdn.iconscout.com/icon/free/png-256/keyboard-arrow-down-1780936-1517439.png">
+            <img v-if="showMore == true" @click="more" class="upArrow" src="https://www.svgrepo.com/download/93813/up-arrow.svg" >
+
             <p v-if="showMore == false">{{ "Show " + hidden + " more" }} </p>
           </div>
         </div>
@@ -58,6 +56,12 @@ const more = () =>{
 </template>
 
 <style scoped>
+.upArrow{
+    margin-bottom: 10px;
+    width: 19px;
+    margin-left: 45%;
+    cursor: pointer;
+}
 .moreChannels{
     display: flex;
     align-items: center;
@@ -114,12 +118,18 @@ const more = () =>{
 }
 .smallMenu{
     margin-top: 60px;
+    height: 95vh;
+    position: fixed;
+    margin-top: 70px;
 
     
 }
 .menu{
-    margin-top: 60px;
-    height: 100%;
+    height: 95vh;
+    overflow-y: scroll;
+    position: fixed;
+    margin-top: 70px;
+
 }
 .first-part{
     display: grid;
@@ -127,6 +137,5 @@ const more = () =>{
     width: 10%;
 
 }
-
 
 </style>
