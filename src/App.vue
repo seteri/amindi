@@ -1,54 +1,21 @@
 <script setup>
-import Categories from "./components/vueFiles/Categories.vue"
-import Head from "./components/vueFiles/Header.vue"
-import Videos from "./components/vueFiles/Videos.vue"
-import LeftSide from "./components/vueFiles/LeftSide.vue"
+import { onMounted } from 'vue';
+
 import { useStore } from 'vuex';
+import navMenu from "./components/vueFiles/navigation.vue"
 const store = useStore()
-const test = () => {
-  console.log()
-}
+onMounted(() => {
+    store.dispatch("api/fetchData","tbilisi")
+})
+
 
 </script>
 
 <template>
-    <Head />
-    <div class="categories">
-      <Categories />
-    </div>
-
-
-  <div class="ff">
-
-    <div class="left">
-      <LeftSide />
-
-    </div>
-    <div class="right">
-      <Videos />
-
-    </div>
+  <div class="flex flex-col min-h-screen font-Roboto bg-weather-primary">
+    <navMenu />
+    <RouterView />
   </div>
 </template>
 
-<style >
-.header-div{
-  display: flex;
-
-}
-.categories {
-  width: 100%;
-  height: 50px;
-}
-
-.ff {
-  display: flex;
-}
-
-
-.right {
-  margin-top: 70px;
-  height: 100%;
-  width: 100%;
-}
-</style>
+<style ></style>
