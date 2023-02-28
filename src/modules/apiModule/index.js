@@ -5,6 +5,8 @@ const apiModule = {
 
     state() {
         return {
+            api_url: "https://api.weatherapi.com/v1/current.json?",
+            api_key: import.meta.env.VITE_API_URL,
             api: null,
          
         }
@@ -28,8 +30,8 @@ const apiModule = {
 
     actions:{
 
-        fetchData({commit},payload){
-            axios.get(`https://api.weatherapi.com/v1/current.json?key=d4c780a430794d8d882195348232602&q=${payload}`)
+        fetchData({commit,state},payload){
+            axios.get(state.api_url+state.api_key+`=${payload}`)
 
             .then(result => commit("SAVE_DATA",result.data))
             console.log(payload)
