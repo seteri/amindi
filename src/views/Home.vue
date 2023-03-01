@@ -1,58 +1,61 @@
 <script setup>
-import { ref } from 'vue';
 import { useStore } from "vuex";
 import { computed } from "vue"
-import { onMounted } from 'vue';
 const store = useStore()
-const weatherInfo = computed(() => store.getters["api/apiInfo"])
-const searchedCity = ref("london")
-const fetchData = ()=>{
-    store.dispatch("api/fetchData",searchedCity.value)
+const toggle = computed(() => store.getters["cities/toggle"])
+const callTogleFunction = () => {
+    store.commit("cities/toggle")
 }
+
+const citiesList = computed(() => store.getters["cities/cities"])
+const isLoaded = computed(() => store.getters["cities/isLoaded"])
+const activeCity = computed(() => store.getters["cities/activeCity"])
+const api = computed(() => store.getters["cities/api"])
+
+const test = (e) => {
+    store.commit("cities/changeCity", e.target.id)
+    console.log(e.target.id)
+}
+
 </script>
 
 <template>
-    <div class=" flex justify-center">
-        <input v-model="searchedCity"
-            class="bg-transparent py-6 pl-14 focus:border-weather-secondary  focus:outline-none focus:shadow-[0px_1px_0_0_#004E71] "
-            placeholder="მოძებნე ქალაქი">
-        <button @click="fetchData">ძებნა</button>
-    </div>
-    <div v-if="weatherInfo!=null" class="w-[80%] ml-[11%]  w-95 h-[70vh] bg-slate-700 flex pt-5  rounded-xl">
-        <div class="flex justify-center ml-[39%]">
-            <div class="flex ">
-                <h1 class="text-white font-bold text-[20px]">{{ weatherInfo.location.country }}/{{
-                    weatherInfo.location.name }}</h1>
-                                    
 
-            </div>
-            
-            <h1 class="text-white font-bold text-[60px] mt-10 ml-[-53%]">{{ weatherInfo.current.temp_c }} <span
-                    class="text-[20px]">c</span></h1>
-        </div>
 
-        <div class="flex mt-[10%] ml-[-12%]">
-            <div class="mt-[20%] ml-[-50%]">
-                <h1 class="text-white text-[20px] ">ქარის სიჩქარე</h1>
-                <h1 class="text-white font-bold ml-10 mt-3">{{ weatherInfo.current.wind_kph }} kph</h1>
-            </div>
-
-            <div class="mt-[20%] ml-[20%]">
-                <h1 class="text-white text-[20px] ">დაბერვის სიძლიერე</h1>
-                <h1 class="text-white font-bold ml-20 mt-3">{{ weatherInfo.current.gust_kph }} kph</h1>
-            </div>
-
-            <div class="mt-[20%] ml-[15%]">
-                <h1 class="text-white text-[20px] ">ბოლოს განახლდა</h1>
-                <h1 class="text-white font-bold ml-5 mt-3">{{ weatherInfo.current.last_updated }}</h1>
+    <div v-if="isLoaded!=false">
+        <button @click="callTogleFunction"
+            class="flex justify-center items-center text-white h-[30px] ml-[20%] rounded-[12px] border w-[8%] bg-weather-secondary">აირჩიე
+            ქალაქი</button>
+        <div v-if="toggle"
+            class="ml-[19.99%] flex flex-wrap  absolute p-10 w-[40%] rounded-lg  text-white bg-weather-secondary">
+            <div class="flex flex-wrap" v-for="city in citiesList" >
+                <p :id="city.id" @click="test" class="cursor-pointer ml-[30px] mb-7 font-bold text-[20px]">{{ city.name }}</p>
             </div>
         </div>
+        <div v-if="isLoaded!=false" class=" w-[300px] h-[780px] ml-8 bg-weather-secondary">
+            <h1 class="text-white font-bold text-[35px] ml-6">{{ api[activeCity].location.name }}</h1>
+            <div class="flex items-center">
+                <img class="ml-[10%] w-[100px] " :src=api[activeCity].current.condition.icon>
+                <p  class="text-white text-[40px] ">{{ api[activeCity].current.temp_c }} <span class="text-[20px]">c</span></p>
+            </div>
+            <div class="w-[93%] ml-2 h-[1px] bg-white">
+            </div>
 
+            <div class="flex items-center">
+                <img class="w-[80px] animate-spin mt-5 ml-5"
+                    src="https://o.remove.bg/downloads/62ac5681-020d-4fd5-b708-50d6472ec43e/354-3542795_wind-turbine-hd-png-download-removebg-preview.png"
+                    >
+                <div>
+                    <p class="ml-8 text-lg  text-white">ქარი და წნევა:</p>
+                    <div class="ml-12">
+                        <p class="text-white">{{ api[activeCity].current.wind_kph }} kph</p>
+                        <p class="text-white">{{ api[activeCity].current.pressure_in }} in</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 
-<style>
-img {
-    width: 20px;
-}
-</style>
+<style></style>

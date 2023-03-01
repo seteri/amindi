@@ -1,9 +1,9 @@
 
 import switchButtons from "../modules/switchButtonsModule";
-import apiModule from "../modules/apiModule";
+import citiesModule from "../modules/citiesModule";
 
 export default function mainPlugin(store){
 
     store.registerModule("switchButtons",switchButtons)
-    store.registerModule("api",apiModule)
+    store.registerModule("cities",citiesModule)
 }

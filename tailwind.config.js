@@ -12,8 +12,8 @@ module.exports = {
 
       },
       colors:{
-        "weather-primary": "#B9F3E4",
-        "weather-secondary": "#EA8FEA",
+        "weather-primary": "#FFF1DC",
+        "weather-secondary": "#3A98B9",
       },
       container:{
         padding: "2rem",
