@@ -35,7 +35,7 @@ const citiesModule = {
 
     mutations: {
         changeCity(state, payload) {
-            state.activeCity = payload
+            state.activeCity = +payload
 
         },
         toggle(state) {
@@ -57,12 +57,13 @@ const citiesModule = {
             for (let a = 0; a < state.georgianCities.length; a++) {
 
                 axios.get(state.api_url + state.api_key + `=${state.georgianCities[a].name}`)
-                    .then(result => setTimeout(() => {
-                        commit("SAVE_DATA", result.data)
-                    }, 1000))
+                    .then(result => commit("SAVE_DATA", {
+                        id: a, data: result.data
+                    })
+                    )
 
             }
-            state.isLoaded = true 
+            state.isLoaded = true
         }
 
     },

@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted } from 'vue';
-
+import registrationPopup from "./components/vueFiles/Registration.vue"
 import { useStore } from 'vuex';
 import navMenu from "./components/vueFiles/navigation.vue"
 const store = useStore()
@@ -12,9 +12,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class=" min-h-screen font-Roboto bg-weather-primary">
+  <div class=" min-h-screen font-Roboto bg-mainBackground bg-no-repeat	bg-cover	 ">
     <navMenu />
     <RouterView />
+    <registrationPopup/>
   </div>
 </template>
 

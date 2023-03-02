@@ -7,13 +7,18 @@ module.exports = {
   
   theme: {
     extend: {
+
+      backgroundImage: {
+        'mainBackground': "url('https://images.pexels.com/photos/186980/pexels-photo-186980.jpeg?cs=srgb&dl=pexels-tahir-shaw-186980.jpg&fm=jpg')",
+        
+      },
       fontFamily:{
         Roboto:["Roboto, sans-serif"]
 
       },
       colors:{
         "weather-primary": "#FFF1DC",
-        "weather-secondary": "#3A98B9",
+        "weather-secondary": "rgba(255, 255, 255, 0.5)",
       },
       container:{
         padding: "2rem",
