@@ -38,15 +38,15 @@ function saveChanges() {
         <div class="flex">
             <div class="flex items-center">
                 <p v-if="!isEditable" class="p-9 font-bold text-[30px]">Username: {{ userInfo[0]?.username }}</p>
-                <input v-else class="p-9 font-bold text-[30px]" v-model="newusername" />
+                <input v-else placeholder="new user" class="p-9 border-2 font-bold  text-[30px]" v-model="newusername" />
             </div>
             <div class="flex items-center">
                 <p v-if="!isEditable" class="p-9 font-bold text-[30px]">Password: {{ userInfo[0]?.password }}</p>
-                <input v-else class="p-9 font-bold text-[30px]" v-model="newpassword" />
+                <input v-else placeholder="new password" class="p-9 border-2 font-bold text-[30px]" v-model="newpassword" />
             </div>
             <div class="flex items-center">
                 <p v-if="!isEditable" class="p-9 font-bold text-[30px]">Email: {{ userInfo[0]?.email }}</p>
-                <input v-else class="p-9 font-bold text-[30px]" v-model="newemail" />
+                <input v-else placeholder="new email" class="p-9 border-2 font-bold text-[30px]" v-model="newemail" />
             </div>
             <button @click="toggleEditable">{{ isEditable ? 'Cancel' : 'Edit' }}</button>
             <button v-if="isEditable" class="ml-8" @click="saveChanges">Save</button>
