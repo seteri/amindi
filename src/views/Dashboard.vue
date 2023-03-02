@@ -9,11 +9,7 @@ const newemail = ref("")
 const userInfo = computed(() => store.getters["registration/userInfo"])
 
 const isEditable = ref(false)
-const inputData = {
-    username: ref(userInfo.value[0]?.username || ''),
-    password: ref(userInfo.value[0]?.password || ''),
-    email: ref(userInfo.value[0]?.email || '')
-}
+
 
 function toggleEditable() {
     isEditable.value = !isEditable.value
