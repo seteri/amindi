@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import mainPlugin from '../plugins/mainPlugin'
+import mainPlugin from "./plugins/mainPlugin"
 
 
 export default createStore({
