@@ -16,7 +16,7 @@ const usersModule = {
     },
     getters: {
         authenticated(state) {
-            return state.authenticated
+            return state.authenticated //
         }
 
     },
