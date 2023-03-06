@@ -8,7 +8,7 @@ const citiesModule = {
     state() {
         return {
             isLoaded: false,
-            api_url: "https://api.weatherapi.com/v1/current.json?",
+            api_url: "https://api.weatherapi.com/v1/forecast.json?",
             api_key: import.meta.env.VITE_API_URL,
             api: [],
 
@@ -56,7 +56,7 @@ const citiesModule = {
         fetchData({ commit, state }) {
             for (let a = 0; a < state.georgianCities.length; a++) {
 
-                axios.get(state.api_url + state.api_key + `=${state.georgianCities[a].name}`)
+                axios.get(state.api_url + state.api_key + `=${state.georgianCities[a].name}&days=7`)
                     .then(result => commit("SAVE_DATA", {
                         id: a, data: result.data
                     })

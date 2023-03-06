@@ -6,7 +6,7 @@ import {useStore} from "vuex";
 const store = useStore()
 const newEmail = ref("")
 const toggleUpdatePopup = () =>{
-  store.commit("switchButtons/toggleUpdatePopup")
+  store.commit("switchButtons/toggleEmailUpdatePopup")
 }
 
 const updateEmail = () =>{
