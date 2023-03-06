@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from "vue-router";
 const home = () => import("../views/Home.vue")
 const dashboard = () => import("../views/Dashboard.vue")
 const profile = () => import("../views/Profile.vue")
-const security = () => import("../views/Security.vue")
 const changeName =() => import("../components/vueFiles/changeName.vue")
 
 const routes = [
@@ -16,7 +15,6 @@ const routes = [
             },
 
 
-            {path: "security", component: security},
         ]
     },
 
