@@ -3,6 +3,11 @@ const registrationModule = {
 
     state() {
         return {
+            registrationAvailability:[
+                {username: null},
+                {email: null},
+                {password: null}
+            ],
             showRegistrationPopup: false,
             isRegistered: false,
             showDashboard:false,
@@ -19,8 +24,13 @@ const registrationModule = {
             state.isRegistered = !state.isRegistered
             state.showRegistrationPopup = !state.showRegistrationPopup
         },
-        updateUser(state,userInfo){
-            state.userInfo=userInfo
+        updateUserName(state,newUsername){
+            state.userInfo[0].username=newUsername
+            console.log(state.userInfo)
+        },
+        updateEmail(state,newEmail){
+            state.userInfo[0].email=newEmail
+            console.log(state.userInfo)
         },
         showRegistrationPopup(state){
             state.showRegistrationPopup = !state.showRegistrationPopup
@@ -33,6 +43,9 @@ const registrationModule = {
     },
 
     getters: {
+        registrationAvailability(state){
+            return state.registrationAvailability
+        },
         userInfo(state){
             return state.userInfo
         },
@@ -52,8 +65,11 @@ const registrationModule = {
         registerUser({commit},userInfo){
             commit("registerUser",userInfo) 
         },
-        updateUserInfo({commit},newInfo){
-            commit("updateUser",newInfo)
+        updateUsername({commit},newUsername){
+            commit("updateUserName",newUsername)
+        },
+        updateEmail({commit},newEmail){
+            commit("updateEmail",newEmail)
         }
     }
 }

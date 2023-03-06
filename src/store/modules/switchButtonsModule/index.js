@@ -3,22 +3,38 @@ const categoriesModule = {
 
     state() {
         return {
-            showSiteInfo: false
-         
+            toggleInfoModal: false,
+            toggleUserUpdatePopup: false,
+            toggleEmailUpdatePopup: false,
+
         }
     },
 
     mutations:{
-        changeShowInfoValue(state){
-            state.showSiteInfo = !state.showSiteInfo 
-        }
+        toggleInfoModal(state){
+            state.toggleInfoModal = !state.toggleInfoModal
+        },
+        toggleUpdatePopup(state){
+            state.toggleUserUpdatePopup = !state.toggleUserUpdatePopup
+        },
+        toggleEmailUpdatePopup(state){
+            state.toggleEmailUpdatePopup = !state.toggleEmailUpdatePopup
+        },
+
 
     },
 
     getters: {
         showSiteInfo(state){
-            return state.showSiteInfo
+            return state.toggleInfoModal
+        },
+        toggleUserUpdatePopup(state){
+            return state.toggleUserUpdatePopup
+        },
+        toggleEmailUpdatePopup(state){
+            return state.toggleEmailUpdatePopup
         }
+
 
 
     }

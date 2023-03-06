@@ -40,8 +40,8 @@ const test = (e) => {
                 </div>
 
                 <div class="flex items-center">
-                    <img class="w-[80px] animate-spin mt-5 ml-5"
-                        src="https://www.freepnglogos.com/uploads/fan-png/fan-svg-png-icon-download-onlinewebfontsm-31.png">
+                    <img class="w-[120px] animate-spin mt-5 ml-5"
+                        src="../assets/png-transparent-attic-fan-computer-icons-blade-ventilation-fan-technic-flower-поставка-removebg-preview.png">
                     <div>
                         <p class="ml-8 text-lg text-[25px] font-bold  text-white">ქარი და წნევა:</p>
                         <div class="ml-12">

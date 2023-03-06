@@ -6,8 +6,17 @@ const store = useStore()
 const username = ref()
 const email = ref()
 const password = ref()
+const registrationAvailability = computed(() => store.getters["registration/registrationAvailability"])
 const showDashboard = computed(() => store.getters["registration/showDashboard"])
 const showRegistrationPopup = computed(() => store.getters["registration/showRegistrationPopup"])
+
+const checkAvailability = () =>{
+
+  if(username.value.length<=4){
+
+  }
+
+}
 const toggleDashboard = () =>{
   store.commit("registration/showDashboard")
 }
@@ -18,7 +27,6 @@ const registerUser = () =>{
         username.value = ""
         email.value = ""
         password.value = ""
-
 }
 
 </script>
@@ -30,9 +38,11 @@ const registerUser = () =>{
                 <div class="space-y-4 mt-6">
                     <div class="w-full">
                         <input v-model="username" type="text" placeholder="username" class="px-4 py-2 bg-gray-50" />
+                      <p v-if="showRegistrationPopup.username" class="text-red-500 font-bold text-[15px]">Username should consist more than 6 letters</p>
                     </div>
                     <div class="w-full">
                         <input v-model="email" type="text" placeholder="email" class="px-4 py-2 bg-gray-50" />
+
                     </div>
                     <div  class="w-full">
                         <input v-model="password" type="password" placeholder="password" class="px-4 py-2 bg-gray-50" />
@@ -42,6 +52,6 @@ const registerUser = () =>{
             </div>
         </div>
         <div v-if="showDashboard" class=" w-[18%] bg-white absolute top-20 flex justify-center items-center  right-24 h-48" >
-            <router-link @click="toggleDashboard" to="/dashboard"><p class="text-[20px] font-bold cursor-pointer hover:opacity-[0.5]">Go to user dashboard </p></router-link>
+            <router-link @click="toggleDashboard" to="/dashboard/profile"><p class="text-[20px] font-bold cursor-pointer hover:opacity-[0.5]">Go to user dashboard </p></router-link>
         </div>
 </template>
