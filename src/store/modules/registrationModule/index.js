@@ -1,16 +1,16 @@
+import axios from "axios"
+
 const registrationModule = {
     namespaced: true,
 
     state() {
         return {
-            registrationAvailability:[
-                {username: null},
-                {email: null},
-                {password: null}
-            ],
+
+            usernameIsValid: null,
+            passwordIsValid: null,
+            finalStatus: null,
+
             showRegistrationPopup: false,
-            isRegistered: false,
-            showDashboard:false,
             userInfo: [
 
             ]
@@ -19,9 +19,19 @@ const registrationModule = {
     },
 
     mutations:{
+
+        checkName(state,length){
+            if(length<5){
+                state.usernameIsValid = false
+            }
+
+            else{
+                state.usernameIsValid = true
+            }
+        },
+
+
         registerUser(state,userInfo){
-            state.userInfo.push(userInfo)
-            state.isRegistered = !state.isRegistered
             state.showRegistrationPopup = !state.showRegistrationPopup
         },
         updateUserName(state,newUsername){
@@ -37,15 +47,31 @@ const registrationModule = {
         },
         showDashboard(state){
             state.showDashboard = !state.showDashboard
-        }
+        },
+
+        GET_STATUS(state,status){
+            state.finalStatus = status
+
+        },
   
 
     },
 
     getters: {
-        registrationAvailability(state){
-            return state.registrationAvailability
+        usernameIsValid(state){
+            return state.usernameIsValid
         },
+
+        finalStatus(state){
+            return state.finalStatus
+        },
+
+      
+
+        passwordIsValid(state){
+            return state.usernameIsValid
+        },
+
         userInfo(state){
             return state.userInfo
         },
@@ -55,22 +81,21 @@ const registrationModule = {
         isRegistered(state){
             return state.isRegistered
         },
-        showDashboard(state){
-            return state.showDashboard
-        }
-
     },
 
     actions:{
         registerUser({commit},userInfo){
-            commit("registerUser",userInfo) 
+            axios.post("https://items.magischer.de/api/auth/register",{
+                name: userInfo.username,
+                email: userInfo.email,
+                password: userInfo.password
+            })
+            .then(result => commit("GET_STATUS",result.data.status))
+            .catch(err => console.log(err))
+
         },
-        updateUsername({commit},newUsername){
-            commit("updateUserName",newUsername)
-        },
-        updateEmail({commit},newEmail){
-            commit("updateEmail",newEmail)
-        }
+        
+
     }
 }
 

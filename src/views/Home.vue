@@ -3,12 +3,19 @@ import { useStore } from "vuex";
 import { computed } from "vue"
 const store = useStore()
 const toggle = computed(() => store.getters["cities/toggle"])
+const finalStatus = computed(() => store.getters["registration/finalStatus"])
 const callTogleFunction = () => {
     store.commit("cities/toggle")
 }
 
+const toggleModal = () => {
+    store.commit("switchButtons/toggleInfoModal")
+}
+const succesfullyRegistered = computed(() => store.getters["switchButtons/showSiteInfo"])
 const activeCity = computed(() => store.getters["cities/activeCity"])
 const api = computed(() => store.getters["cities/api"])
+
+
 
 const test = (e) => {
     store.commit("cities/changeCity", e)
@@ -61,7 +68,16 @@ const test = (e) => {
             <div class="w-[70%] ml-[17px] mt-4 rounde flex justify-center items-center text-[40px] bg-weather-secondary">
                 <p>სარეკლამო ადგილი</p>
             </div>
-       
+
+            <div v-if="succesfullyRegistered" class="fixed w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8">
+                <div class="p-4 bg-white self-start mt-32 max-w-screen-md">
+                    <p v-if="finalStatus">You have been registered succesfully</p>
+                    <p v-else-if="finalStatus!=true">You have entered something wrong, try again</p>
+                    
+                    <button @click="toggleModal" class="text-white mt-8 bg-weather-primary py-2 px-6">Close</button>
+                </div>
+            </div>
+
         </div>
 
     </div>

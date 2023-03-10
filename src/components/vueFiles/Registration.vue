@@ -6,27 +6,31 @@ const store = useStore()
 const username = ref()
 const email = ref()
 const password = ref()
-const registrationAvailability = computed(() => store.getters["registration/registrationAvailability"])
-const showDashboard = computed(() => store.getters["registration/showDashboard"])
 const showRegistrationPopup = computed(() => store.getters["registration/showRegistrationPopup"])
+const usernameIsValid = computed(() => store.getters["registration/usernameIsValid"])
 
-const checkAvailability = () =>{
-
-  if(username.value.length<=4){
-
-  }
+const checkAvaliability = (lenght) =>{
+    store.commit("registration/checkName",lenght)
 
 }
+
+
+const toggleModal = () => {
+    store.commit("switchButtons/toggleInfoModal")
+}
+
 const toggleDashboard = () =>{
   store.commit("registration/showDashboard")
 }
 const registerUser = () =>{
 
-    store.dispatch("registration/registerUser",{username:username.value,email:email.value,password:password.value})
+    store.dispatch("registration/registerUser",{username:username.value,email:email.value,password:password.value,length: username.value.lenght})
         console.log(store.state.registration.userInfo) 
         username.value = ""
         email.value = ""
         password.value = ""
+    
+        toggleModal()
 }
 
 </script>
@@ -37,15 +41,15 @@ const registerUser = () =>{
                 <h1 class="text-center text-lg font-bold text-gray-500">Form Register</h1>
                 <div class="space-y-4 mt-6">
                     <div class="w-full">
-                        <input v-model="username" type="text" placeholder="username" class="px-4 py-2 bg-gray-50" />
-                      <p v-if="showRegistrationPopup.username" class="text-red-500 font-bold text-[15px]">Username should consist more than 6 letters</p>
+                        <input v-model="username" @change="()=>checkAvaliability(username.length)" type="text" placeholder="username" class="px-4 py-2 bg-gray-50" />
+                        <p v-if="usernameIsValid == false" class="text-red-500 font-bold text-[15px]">Use more than 5 letters</p>
                     </div>
                     <div class="w-full">
                         <input v-model="email" type="text" placeholder="email" class="px-4 py-2 bg-gray-50" />
 
                     </div>
                     <div  class="w-full">
-                        <input v-model="password" type="password" placeholder="password" class="px-4 py-2 bg-gray-50" />
+                        <input v-model="password"   type="password" placeholder="password" class="px-4 py-2 bg-gray-50" />
                     </div>
                 </div>
                 <button @click="registerUser" class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">Register</button>

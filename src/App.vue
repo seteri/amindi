@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import registrationPopup from "./components/vueFiles/Registration.vue"
+import loginPopup from "./components/vueFiles/Login.vue"
 import { useStore } from 'vuex';
 import navMenu from "./components/vueFiles/navigation.vue"
 const store = useStore()
@@ -16,6 +17,7 @@ onMounted(() => {
     <navMenu />
     <RouterView />
     <registrationPopup/>
+    <loginPopup/>
   </div>
 </template>
 

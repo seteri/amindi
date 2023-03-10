@@ -1,9 +1,9 @@
 <script setup>
+import ChangeName from "@/components/vueFiles/changeName.vue";
+import ChangeEmail from "@/components/vueFiles/changeEmail.vue";
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 const store = useStore()
-import ChangeName from "@/components/vueFiles/changeName.vue";
-import ChangeEmail from "@/components/vueFiles/changeEmail.vue";
 const userInfo = computed(() => store.getters["registration/userInfo"])
 const usernameUpdatePopup = computed(() => store.getters["switchButtons/toggleUserUpdatePopup"])
 const emailUpdatePopup = computed(() => store.getters["switchButtons/toggleEmailUpdatePopup"])
