@@ -21,7 +21,7 @@ const registrationModule = {
     mutations:{
 
         checkName(state,length){
-            if(length<5){
+            if(length<6){
                 state.usernameIsValid = false
             }
 
@@ -31,9 +31,7 @@ const registrationModule = {
         },
 
 
-        registerUser(state,userInfo){
-            state.showRegistrationPopup = !state.showRegistrationPopup
-        },
+  
         updateUserName(state,newUsername){
             state.userInfo[0].username=newUsername
             console.log(state.userInfo)
@@ -45,13 +43,11 @@ const registrationModule = {
         showRegistrationPopup(state){
             state.showRegistrationPopup = !state.showRegistrationPopup
         },
-        showDashboard(state){
-            state.showDashboard = !state.showDashboard
-        },
+
 
         GET_STATUS(state,status){
             state.finalStatus = status
-
+            state.showRegistrationPopup = !state.showRegistrationPopup
         },
   
 
@@ -85,13 +81,16 @@ const registrationModule = {
 
     actions:{
         registerUser({commit},userInfo){
-            axios.post("https://items.magischer.de/api/auth/register",{
-                name: userInfo.username,
-                email: userInfo.email,
-                password: userInfo.password
-            })
-            .then(result => commit("GET_STATUS",result.data.status))
-            .catch(err => console.log(err))
+            if(userInfo.sigrdze>5){
+                axios.post("https://items.magischer.de/api/auth/register",{
+                    name: userInfo.username,
+                    email: userInfo.email,
+                    password: userInfo.password
+                })
+                .then(result => commit("GET_STATUS",result.data.status))
+                
+                .catch(err => console.log(err))
+            }
 
         },
         

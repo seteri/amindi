@@ -19,12 +19,10 @@ const toggleModal = () => {
     store.commit("switchButtons/toggleInfoModal")
 }
 
-const toggleDashboard = () =>{
-  store.commit("registration/showDashboard")
-}
+
 const registerUser = () =>{
 
-    store.dispatch("registration/registerUser",{username:username.value,email:email.value,password:password.value,length: username.value.lenght})
+    store.dispatch("registration/registerUser",{username:username.value,email:email.value,password:password.value,sigrdze: username.value.length})
         console.log(store.state.registration.userInfo) 
         username.value = ""
         email.value = ""
@@ -55,7 +53,5 @@ const registerUser = () =>{
                 <button @click="registerUser" class="w-full mt-5 bg-indigo-600 text-white py-2 rounded-md font-semibold tracking-tight">Register</button>
             </div>
         </div>
-        <div v-if="showDashboard" class=" w-[18%] bg-white absolute top-20 flex justify-center items-center  right-24 h-48" >
-            <router-link @click="toggleDashboard" to="/dashboard/profile"><p class="text-[20px] font-bold cursor-pointer hover:opacity-[0.5]">Go to user dashboard </p></router-link>
-        </div>
+
 </template>
