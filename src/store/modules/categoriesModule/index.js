@@ -7,6 +7,7 @@ const categoriesModule = {
         return {
 
             usersAPI: null,
+            categoriesApi: import.meta.env.VITE_DATABASE_URL
         }
     },
     getters: {
@@ -34,8 +35,8 @@ const categoriesModule = {
 
         },
 
-        callApi({ commit }) {
-            axios.get(`http://items.magischer.de/api/categories`)
+        callApi({ commit,state }) {
+            axios.get(state.categoriesApi)
                 .then(result => {
                     commit("SAVE_DATA", result.data)
                     console.log(result)
@@ -44,7 +45,7 @@ const categoriesModule = {
         },
 
         deleteUser({state }, id) {
-            axios.delete(`https://items.magischer.de/api/categories/${id}`,
+            axios.delete(`${state.categoriesApi}/${id}`,
                 {
                     headers: {
                         "Accept": "application/json",
@@ -59,7 +60,7 @@ const categoriesModule = {
         },
 
         addUser({ state }, name) {
-            axios.post(`https://items.magischer.de/api/categories`,
+            axios.post(state.categoriesApi,
                 {
                     "name": name,
                     "type": "news",
@@ -77,7 +78,7 @@ const categoriesModule = {
 
         editUser({state},newUser){
 
-            axios.put(`https://items.magischer.de/api/categories/${newUser.id}`,
+            axios.put(`${state.categoriesApi}/${id}`,
             {
                 "name": newUser.newName,
                 "type": "news",
