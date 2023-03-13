@@ -3,7 +3,7 @@ import { onMounted } from 'vue';
 import registrationPopup from "./components/vueFiles/Registration.vue"
 import loginPopup from "./components/vueFiles/Login.vue"
 import { useStore } from 'vuex';
-import navMenu from "./components/vueFiles/navigation.vue"
+
 const store = useStore()
 onMounted(() => {
     store.dispatch("cities/fetchData")
@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <div class=" min-h-screen font-Roboto bg-mainBackground bg-no-repeat	bg-cover	 ">
-    <navMenu />
+  
     <RouterView />
     <registrationPopup/>
     <loginPopup/>

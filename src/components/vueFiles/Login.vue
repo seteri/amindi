@@ -7,7 +7,6 @@ const email = ref()
 const password = ref()
 const showDashboard = computed(() => store.getters["registration/showDashboard"])
 const showLoginPopup = computed(() => store.getters["login/logInPopup"])
-const isLoggedIn = computed(() => store.getters["login/isLoggedIn"])
 const loginFailed = computed(() => store.getters["login/couldNotLogin"])
 const login = () =>{
     store.dispatch("login/login",{

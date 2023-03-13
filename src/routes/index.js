@@ -2,8 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 const home = () => import("../views/Home.vue")
 const dashboard = () => import("../views/Dashboard.vue")
 const profile = () => import("../views/Profile.vue")
-const changeName =() => import("../components/vueFiles/changeName.vue")
-
+const AdminPanel = () => import("../views/AdminPanel.vue")
+const editUser = () => import("../views/EditUser.vue")
 const routes = [
     {path: "/", component: home},
     {
@@ -17,6 +17,14 @@ const routes = [
 
         ]
     },
+
+    {path: "/admin", name: "adminPanel", component: AdminPanel,
+
+    children: [
+        {path: "edit/:id", name:"editPop", component: editUser}
+    ]
+
+}
 
 ]
 

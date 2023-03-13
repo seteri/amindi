@@ -6,6 +6,7 @@ const store = useStore()
 const username = ref()
 const email = ref()
 const password = ref()
+
 const showRegistrationPopup = computed(() => store.getters["registration/showRegistrationPopup"])
 const usernameIsValid = computed(() => store.getters["registration/usernameIsValid"])
 

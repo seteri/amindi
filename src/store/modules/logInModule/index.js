@@ -10,7 +10,10 @@ const loginModule = {
         }
     },
     getters: {
+        token(state){
 
+            return state.isLoggedIn.token
+        },
         logInPopup(state){
             return state.showLogInpopup
         },
@@ -46,14 +49,17 @@ const loginModule = {
     },
     actions: {
 
-        login({commit},payload){
+        login({commit,state},payload){
             axios.post("https://items.magischer.de/api/auth/login",
             {
                 email: payload.email,
                 password: payload.password
              }
              )
-             .then(result => commit("SAVE_INFO",result.data.status))
+             .then(result => {
+                commit("SAVE_INFO",result.data)
+                console.log(state)
+            })
              .catch(err => commit("FAIL_TO_LOGIN"))
   
         }

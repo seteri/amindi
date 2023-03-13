@@ -1,6 +1,7 @@
 <script setup>
 import { useStore } from "vuex";
 import { computed } from "vue"
+import navMenu from "../components/vueFiles/navigation.vue"
 const store = useStore()
 const toggle = computed(() => store.getters["cities/toggle"])
 const finalStatus = computed(() => store.getters["registration/finalStatus"])
@@ -25,6 +26,7 @@ const test = (e) => {
 </script>
 
 <template>
+    <navMenu/>
     <div>
         <button @click="callTogleFunction"
             class="flex justify-center items-center text-white h-[30px] ml-[20%] rounded-[12px] border w-[8%] bg-weather-secondary">აირჩიე
