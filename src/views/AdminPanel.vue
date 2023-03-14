@@ -14,27 +14,41 @@ onMounted(() => {
 })
 
 
-
+const showDeletePopup = computed(() => store.getters["categories/showDeletePopup"])
 const deleteUser = (id) => {
     store.dispatch("categories/deleteUser", id)
 
 }
 
-const editPanel = (id) =>{
-    router.push({name:"editPop", params:{id}})
+const deletingUser = ref()
+
+const toggleDeletePopup = (id) =>{
+
+    store.commit("categories/TOGGLE_DELETE_POPUP")
+    deletingUser.value = id
+
 }
 
-const name = ref("")
+const editPanel = (id) => {
+    router.push({ name: "editPop", params: { id } })
+}
+
+const deletingUserPopup = () =>{
+    store.commit("categories/TOGGLE_DELETE_POPUP")
+
+}
+
 </script>
 
 <template>
-
     <div v-if="isLoggedIn?.status != true">
-        <navigation/>
+        <navigation />
         <p class="text-red-600 text-[30px]">Log in to use admin panel</p>
     </div>
 
-    
+
+
+
     <div v-else-if="isLoggedIn?.status" class=" w-[100vw] h-[100vh] bg-slate-500">
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -62,11 +76,11 @@ const name = ref("")
                             {{ user.id }}
                         </th>
                         <td class="px-6 py-4 cursor-pointer hover:text-black">
-                            {{ user.name }} <i @click="() =>editPanel(user.id)" class="fa-regular fa-pen-to-square"></i>
+                            {{ user.name }} <i @click="() => editPanel(user.id)" class="fa-regular fa-pen-to-square"></i>
                         </td>
 
                         <td class="px-6 py-4 cursor-pointer">
-                            {{ user.type }} <i @click="() => deleteUser(user.id)"
+                            {{ user.type }} <i @click="() =>toggleDeletePopup(user.id)"
                                 class="fa-solid fa-trash hover:text-red-600 ml-10"></i>
                         </td>
                     </tr>
@@ -75,6 +89,17 @@ const name = ref("")
                 </tbody>
             </table>
             <RouterView />
+
+            <div v-if="showDeletePopup" class="fixed w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8">
+                <div class="p-4 bg-white self-start mt-32 max-w-screen-md">
+                    <p>Confirm you really want to delete user <span> {{ deletingUser }} </span> from database</p>
+                    <button @click="() => deleteUser(deletingUser)"
+                    class=" mt-8 text-slate-500 duration-300 mr-5 hover:bg-orange-500 hover:text-white  bg-weather-primary py-2 px-6">Save
+                    changes</button>
+                    <button @click="deletingUserPopup" class=" mt-8 text-black bg-slate-100 py-2 px-6">Close</button>
+
+                </div>
+            </div>
         </div>
 
 

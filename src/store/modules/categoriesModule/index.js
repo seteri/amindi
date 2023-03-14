@@ -5,13 +5,15 @@ const categoriesModule = {
     namespaced: true,
     state() {
         return {
-
+            showDeletePopup : false,
             usersAPI: null,
-            categoriesApi: import.meta.env.VITE_DATABASE_URL
         }
     },
     getters: {
+        showDeletePopup(state){
+            return state.showDeletePopup
 
+        },
         usersAPI(state) {
             return state.usersAPI
         }
@@ -19,6 +21,11 @@ const categoriesModule = {
 
     },
     mutations: {
+
+        TOGGLE_DELETE_POPUP(state){
+            state.showDeletePopup = !state.showDeletePopup
+
+        },
 
         SAVE_DATA(state, data) {
             state.usersAPI = data
@@ -36,7 +43,7 @@ const categoriesModule = {
         },
 
         callApi({ commit,state }) {
-            axios.get(state.categoriesApi)
+            axios.get("/categories")
                 .then(result => {
                     commit("SAVE_DATA", result.data)
                     console.log(result)
@@ -44,8 +51,8 @@ const categoriesModule = {
                
         },
 
-        deleteUser({state }, id) {
-            axios.delete(`${state.categoriesApi}/${id}`,
+        deleteUser({state,commit }, id) {
+            axios.delete(`/categories/${id}`,
                 {
                     headers: {
                         "Accept": "application/json",
@@ -54,31 +61,17 @@ const categoriesModule = {
                 }
 
             )
+            .then(commit("TOGGLE_DELETE_POPUP"))
             .then(state.usersAPI.data = state.usersAPI.data.filter(user => user.id !== id ))
+
 
     
         },
 
-        addUser({ state }, name) {
-            axios.post(state.categoriesApi,
-                {
-                    "name": name,
-                    "type": "news",
-                },
-                {
-                    headers: {
-                        "Accept": "application/json",
-                        "Authorization": `Bearer ${store.getters['login/token']}`
-                    }
-                }
 
-            )
-                .then(res => console.log(res))
-        },
+       async editUser({state,dispatch},newUser){
 
-        editUser({state},newUser){
-
-            axios.put(`${state.categoriesApi}/${id}`,
+           await axios.put(`/categories/${newUser.id}`,
             {
                 "name": newUser.newName,
                 "type": "news",

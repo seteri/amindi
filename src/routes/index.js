@@ -21,7 +21,7 @@ const routes = [
     {path: "/admin", name: "adminPanel", component: AdminPanel,
 
     children: [
-        {path: "edit/:id", name:"editPop", component: editUser}
+        {path: "edit/categories/:id", name:"editPop", component: editUser}
     ]
 
 }

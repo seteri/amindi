@@ -10,8 +10,9 @@ const store = useStore()
 
 const newUser = ref("")
 
-const editUser = () =>{
-    store.dispatch("categories/editUser", {newName: newUser.value,id: route.params.id})
+const editUser = async () =>{
+    await store.dispatch("categories/editUser", {newName: newUser.value,id: route.params.id})
+    await store.dispatch("categories/callApi")
 }
 
 </script>

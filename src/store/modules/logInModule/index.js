@@ -1,4 +1,5 @@
 import axios from "axios"
+import store from "../.."
 const loginModule = {
     namespaced: true,
     state() {
@@ -31,8 +32,13 @@ const loginModule = {
     },
     mutations: {
 
+        popupOff(state){
+            state.showLogInpopup = false
+        },
+
         TOGGLE_POPUP(state){
             state.showLogInpopup = !state.showLogInpopup
+            store.commit("registration/popupOff")
         },
 
         SAVE_INFO(state,status){

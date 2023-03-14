@@ -1,4 +1,5 @@
 import axios from "axios"
+import store from "../.."
 
 const registrationModule = {
     namespaced: true,
@@ -19,6 +20,10 @@ const registrationModule = {
     },
 
     mutations:{
+
+        popupOff(state){
+            state.showRegistrationPopup = false
+        },
 
         checkName(state,length){
             if(length<6){
@@ -42,6 +47,7 @@ const registrationModule = {
         },
         showRegistrationPopup(state){
             state.showRegistrationPopup = !state.showRegistrationPopup
+            store.commit("login/popupOff")
         },
 
 
