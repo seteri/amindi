@@ -6,6 +6,7 @@ const categoriesModule = {
             toggleInfoModal: false,
             toggleUserUpdatePopup: false,
             toggleEmailUpdatePopup: false,
+            toggleUserMenu: false,
 
         }
     },
@@ -20,11 +21,20 @@ const categoriesModule = {
         toggleEmailUpdatePopup(state){
             state.toggleEmailUpdatePopup = !state.toggleEmailUpdatePopup
         },
+        toggleUserMenu(state){
+            state.toggleUserMenu = !state.toggleUserMenu
+        }
+
+        
 
 
     },
 
     getters: {
+        toggleUserMenu(state){
+            return state.toggleUserMenu
+
+        },
         showSiteInfo(state){
             return state.toggleInfoModal
         },

@@ -1,5 +1,6 @@
 import axios from "axios"
 import store from "../.."
+
 const loginModule = {
     namespaced: true,
     state() {
@@ -26,11 +27,16 @@ const loginModule = {
             return state.couldNotLogin
         }
 
-
-
-
     },
     mutations: {
+        LOG_OUT(state){
+            state.isLoggedIn = null
+
+            localStorage.removeItem("name")
+            store.commit("switchButtons/toggleUserMenu")
+            console.log(localStorage)
+
+        },
 
         popupOff(state){
             state.showLogInpopup = false
@@ -63,15 +69,13 @@ const loginModule = {
              }
              )
              .then(result => {
+                localStorage.setItem("name",JSON.stringify(result.data))
                 commit("SAVE_INFO",result.data)
                 console.log(state)
             })
              .catch(err => commit("FAIL_TO_LOGIN"))
   
         }
-        
-
-        
 
     }
 }

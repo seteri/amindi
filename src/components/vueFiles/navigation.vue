@@ -2,16 +2,21 @@
 import { useStore } from "vuex";
 import { computed } from "vue"
 const isLoggedIn = computed(() => store.getters["login/isLoggedIn"])
-
+const userMenu = computed(() => store.getters["switchButtons/toggleUserMenu"])
 const toggleModal = () => {
   store.commit("switchButtons/toggleInfoModal")
 }
-
 const store = useStore()
 const showRegistrationPopup = () => {
   store.commit("registration/showRegistrationPopup")
 }
+const toggleUserMenu = () =>{
+  store.commit("switchButtons/toggleUserMenu")
 
+}
+const logOut = () =>{
+  store.commit("login/LOG_OUT")
+}
 
 const showLogInPopup = () => {
   store.commit("login/TOGGLE_POPUP")
@@ -37,17 +42,27 @@ const showLogInPopup = () => {
         <p v-if="isLoggedIn?.status != true" @click="showLogInPopup"
           class=" font-bold text-xl hover:text-weather-secondary rounded-xl px-2  bg-teal-500 cursor-pointer duration-300">
           LOG IN</p>
-        <router-link v-if="isLoggedIn" to="/admin">
-          <p 
-            class=" font-bold text-xl hover:text-weather-secondary rounded-xl px-2  bg-teal-500 cursor-pointer duration-300">
-            Admin panel</p>
-        </router-link>
-        <div v-if="isLoggedIn"
+
+        <div @click="toggleUserMenu" v-if="isLoggedIn"
         class="flex bg-weather-secondary cursor-pointer  hover:bg-slate-700 items-center justify-center w-[40px] rounded-[50%] h-[40px] mt-[-5px]">
         {{isLoggedIn?.user.name[0] }}</div>
     </div>
-
-
-
   </nav>
-</header></template>
+
+</header>
+<div v-if="userMenu" class="bg-white flex items-center justify-center flex-col absolute right-[10%] w-[10%] rounded-xl h-[200px]">
+    <p class="font-bold hover:text-slate-500 cursor-pointer py-2">Profile (soon)</p>
+    <p class="font-bold hover:text-slate-500 cursor-pointer py-2">Settings (soon)</p>
+    <router-link to="/admin"><p class="font-bold hover:text-slate-500 cursor-pointer py-2">Admin panel</p></router-link>
+    <div class="flex border-t-2 items-center justify-center h-[30px] w-[100%]">
+      <button @click="logOut" class="w-[50%] h-[100%] text-white font-bold rounded-xl mt-5 bg-blue-600">LOG OUT</button>
+
+    </div>
+    
+</div>
+
+
+</template>
+
+<style>
+</style>
